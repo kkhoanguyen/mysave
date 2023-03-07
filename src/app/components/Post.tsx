@@ -12,7 +12,7 @@ export default function Post({ post }: Props) {
   const [isShare, setIsShare] = useState(false);
 
   return (
-    <>
+    <div className='w-full'>
       <Card bordered className='bg-white'>
         <div className="flex justify-end">
           <Button startIcon={shareIcon} onClick={() => setIsShare(true)} color="primary" shape="circle" variant="link" />
@@ -28,7 +28,7 @@ export default function Post({ post }: Props) {
         </a>
       </Card >
       <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${window.location.href}posts/${post.id}`} />
-    </>
+    </div>
   );
 }
 

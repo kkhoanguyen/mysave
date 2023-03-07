@@ -21,7 +21,7 @@ export default function ShareModal({ open, setOpen, shareURL }: { shareURL: stri
       </Modal.Header>
 
       <Modal.Body>
-        <div className='flex items-stretch gap-2'>
+        <div className='flex flex-col sm:flex-row items-stretch gap-2'>
           <div className='flex items-center flex-1 rounded-md bg-neutral p-2'>
             <p>{shareURL}</p>
           </div>
