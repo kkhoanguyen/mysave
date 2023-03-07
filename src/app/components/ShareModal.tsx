@@ -3,7 +3,7 @@ import { Modal, Button } from 'react-daisyui';
 import { copyIcon } from '@/icons';
 import useCopyToClipboard from '@/hooks/useCopyToClickboard';
 
-export default function ShareModal({ open, setOpen }: { open: boolean; setOpen: (t: boolean) => void; }) {
+export default function ShareModal({ open, setOpen, shareURL }: { shareURL: string; open: boolean; setOpen: (t: boolean) => void; }) {
   const [value, copy, reset] = useCopyToClipboard();
 
   return (
@@ -23,9 +23,9 @@ export default function ShareModal({ open, setOpen }: { open: boolean; setOpen: 
       <Modal.Body>
         <div className='flex items-stretch gap-2'>
           <div className='flex items-center flex-1 rounded-md bg-neutral p-2'>
-            <p>{window.location.href}</p>
+            <p>{shareURL}</p>
           </div>
-          <Button startIcon={copyIcon} onClick={() => copy(window.location.href)}>{value ? "Copied" : "Copy"}</Button>
+          <Button startIcon={copyIcon} onClick={() => copy(shareURL)}>{value ? "Copied" : "Copy"}</Button>
         </div>
       </Modal.Body>
     </Modal>

@@ -1,7 +1,7 @@
-import Head from 'next/head';
 import { getPostById } from "@/utils/supabase";
-import { } from 'next/navigation';
+import { notFound } from "next/navigation";
 import { Post } from "@/types/post";
+import { headers } from 'next/headers';
 import ShowMoreText from "@/app/components/ShowMoreText";
 import PostActions from "@/app/components/PostActions";
 
@@ -13,40 +13,42 @@ export interface Props {
   params: Params;
 }
 
-
-// export async function generateMetadata({ params }: Props) {
-//   const post: Post = await getPostById(Number(params.pid));
-//   console.log(post);
-//   return {
-//     title: `My Save : ${post.title}`,
-//     openGraph: {
-//       title: `My Save : ${post.title}`,
-//       description: post.description,
-//       siteName: 'My Save',
-//       images: [
-//         {
-//           url: post.thumbnail,
-//           width: 800,
-//           height: 600,
-//         },
-//       ],
-//       locale: 'en-US',
-//       type: 'website',
-//     },
-//   };
-// }
-
-const PostDetails = async ({ params }: Props) => {
+export async function generateMetadata({ params }: Props) {
   const post: Post = await getPostById(Number(params.pid));
+  return {
+    title: `My Save : ${post.title}`,
+    openGraph: {
+      title: `${post.title}`,
+      description: post.description,
+      siteName: 'My Save',
+      images: [
+        {
+          url: post.thumbnail,
+          width: 800,
+          height: 600,
+        },
+      ],
+      locale: 'en-US',
+      type: 'website',
+    },
+  };
+}
+
+const PostDetails = async (props: Props) => {
+  const { params } = props;
+  const headersList = headers();
+  const host = headersList.get('host');
+  let post: Post;
+  try {
+    post = await getPostById(Number(params.pid));
+  } catch (error) {
+    return notFound();
+  }
+
   return (
     <>
-      {/* <Head></Head> doesn't work in NextJS 13 and generateMetadata is also broken.  It only 
-      add the meta info after render, so I'm using head tag here. */}
-      <head key="og">
-        <meta property="og:title" content={post.title} />
-        <meta property="og:image:url" content={post.thumbnail} />
-      </head>
       <header className="">
+
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
           <a className="btn btn-primary" href="/">Back to home</a>
         </div>
@@ -66,7 +68,7 @@ const PostDetails = async ({ params }: Props) => {
           <div className="mt-5">
             <div className="flex">
               <h1 className="text-2xl font-bold flex-1">{post.title}</h1>
-              <PostActions post={post} />
+              <PostActions post={post} shareURL={`${host}/posts/${post.id}`} />
             </div>
             {post.description && <ShowMoreText text={post.description} />}
           </div>

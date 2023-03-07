@@ -27,7 +27,7 @@ export default function Post({ post }: Props) {
           </Card.Body>
         </a>
       </Card >
-      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} />
+      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${window.location.href}posts/${post.id}`} />
     </>
   );
 }

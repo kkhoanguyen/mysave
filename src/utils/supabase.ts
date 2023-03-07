@@ -35,7 +35,7 @@ export async function getPostById(id: number) {
   if (data && data[0]) {
     return data[0] as Post;
   } else {
-    throw error;
+    throw new Error("post not found");
   }
 }
 export async function insertPost(post: Post) {

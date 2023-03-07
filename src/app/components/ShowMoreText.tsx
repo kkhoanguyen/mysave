@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from 'react';
-import { Collapse } from 'react-daisyui';
 
 export interface Props {
   text: string,
@@ -12,7 +11,7 @@ export default function ShowMoreText({
   initState = false,
   length = 100
 }: Props) {
-  const [showMore, setShowMore] = useState(false);
+  const [showMore, setShowMore] = useState(initState);
   return (
     <>
       <p className="mt-1 text-gray-400">{

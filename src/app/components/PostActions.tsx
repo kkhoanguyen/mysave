@@ -8,8 +8,9 @@ import ShareModal from './ShareModal';
 
 export interface Props {
   post: Post;
+  shareURL: string;
 }
-export default function PostActions({ post }: Props) {
+export default function PostActions({ post, shareURL }: Props) {
   const [isDelete, setIsDelete] = useState(false);
   const [isShare, setIsShare] = useState(false);
   const router = useRouter();
@@ -29,7 +30,7 @@ export default function PostActions({ post }: Props) {
           <Dropdown.Item color='error' onClick={() => setIsDelete(true)}>{trashIcon} Delete</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} />
+      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={shareURL} />
 
       <Modal open={isDelete} responsive>
         <Button
