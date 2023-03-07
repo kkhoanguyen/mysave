@@ -18,7 +18,6 @@ export default function Posts() {
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${page}`);
     if (resp.status >= 200 && resp.status < 300) {
       const respData: ResData = await resp.json();
-      console.log(respData, 'respData');
       setData((prev) => ({
         posts: prev && prev.posts ? prev.posts.concat(respData.posts) : respData.posts,
         total: respData.total
@@ -64,7 +63,6 @@ export default function Posts() {
     }
     setLoading(false);
   };
-  console.log(data);
   return (
     <>
       <CreateVideo onCreateDone={handleOnCreateDone} />
