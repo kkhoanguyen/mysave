@@ -14,32 +14,38 @@ export interface Props {
 }
 
 
-export async function generateMetadata({ params }: Props) {
-  const post: Post = await getPostById(Number(params.pid));
-  return {
-    title: `My Save : ${post.title}`,
-    openGraph: {
-      title: `My Save : ${post.title}`,
-      description: post.description,
-      siteName: 'My Save',
-      images: [
-        {
-          url: post.thumbnail,
-          width: 800,
-          height: 600,
-        },
-      ],
-      locale: 'en-US',
-      type: 'website',
-    },
-  };
-}
+// export async function generateMetadata({ params }: Props) {
+//   const post: Post = await getPostById(Number(params.pid));
+//   console.log(post);
+//   return {
+//     title: `My Save : ${post.title}`,
+//     openGraph: {
+//       title: `My Save : ${post.title}`,
+//       description: post.description,
+//       siteName: 'My Save',
+//       images: [
+//         {
+//           url: post.thumbnail,
+//           width: 800,
+//           height: 600,
+//         },
+//       ],
+//       locale: 'en-US',
+//       type: 'website',
+//     },
+//   };
+// }
 
 const PostDetails = async ({ params }: Props) => {
   const post: Post = await getPostById(Number(params.pid));
-  const ytLink = `https://www.youtube.com/embed/${post.videoId}?autoplay=1`;
   return (
     <>
+      {/* <Head></Head> doesn't work in NextJS 13 and generateMetadata is also broken.  It only 
+      add the meta info after render, so I'm using head tag here. */}
+      <head key="og">
+        <meta property="og:title" content={post.title} />
+        <meta property="og:image:url" content={post.thumbnail} />
+      </head>
       <header className="">
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
           <a className="btn btn-primary" href="/">Back to home</a>
