@@ -31,7 +31,7 @@ export default function PostActions({ post }: Props) {
       </Dropdown>
       <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} />
 
-      <Modal open={isDelete}>
+      <Modal open={isDelete} responsive>
         <Button
           size="sm"
           shape="circle"

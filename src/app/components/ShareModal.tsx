@@ -7,7 +7,7 @@ export default function ShareModal({ open, setOpen }: { open: boolean; setOpen: 
   const [value, copy, reset] = useCopyToClipboard();
 
   return (
-    <Modal open={open}>
+    <Modal open={open} responsive>
       <Button
         size="sm"
         shape="circle"
