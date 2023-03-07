@@ -1,4 +1,3 @@
-'use client';
 import React, { useState, useCallback } from 'react';
 import CreateVideoModal from './CreateVideoModal';
 import { Button } from 'react-daisyui';

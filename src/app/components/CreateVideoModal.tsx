@@ -1,4 +1,3 @@
-'use client';
 import { Fragment, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Button, Input, Modal } from 'react-daisyui';
