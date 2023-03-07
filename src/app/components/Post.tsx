@@ -22,4 +22,7 @@ export default function Post({ post }: Props) {
   );
 }
 
+export const revalidate = 0
+
+
 
