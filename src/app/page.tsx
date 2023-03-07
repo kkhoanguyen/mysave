@@ -4,13 +4,8 @@ import PostComponent from "./components/Post";
 import { getPosts } from "@/utils/supabase";
 
 export default async function Home() {
-  let posts;
-  try {
-    posts = await getPosts();
-  } catch (error) {
-
-  }
-
+  const posts = await getPosts();
+  console.log(posts)
   return (
     <>
       <header className="bg-white shadow">
