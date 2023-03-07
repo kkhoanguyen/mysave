@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useCallback, useRef, RefObject } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Post from './Post';
 import { Post as PostType } from '@/types/post';
 import CreateVideo from "./CreateVideo";
@@ -18,13 +18,11 @@ export default function Posts() {
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${page}`);
     if (resp.statusText === "OK") {
       const respData: ResData = await resp.json();
-      setData((prev) => {
-        const newData = {
-          posts: prev && prev.posts ? prev.posts.concat(respData.posts) : respData.posts,
-          total: respData.total
-        };
-        return newData;
-      });
+      console.log(respData, 'respData');
+      setData((prev) => ({
+        posts: prev && prev.posts ? prev.posts.concat(respData.posts) : respData.posts,
+        total: respData.total
+      }));
     } else {
       setError("Error fetching posts");
     }
