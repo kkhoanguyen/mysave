@@ -48,13 +48,12 @@ const PostDetails = async (props: Props) => {
   return (
     <>
       <header className="">
-
         <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
           <a className="btn btn-primary" href="/">Back to home</a>
         </div>
       </header>
       <main>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 px-6">
           <div className="aspect-w-16 aspect-h-9">
             <iframe
               width="853"

@@ -64,7 +64,7 @@ export default function Posts() {
     setLoading(false);
   };
   return (
-    <>
+    <div className="mx-auto max-w-7xl px-6 sm:px-6 lg:px-8">
       <CreateVideo onCreateDone={handleOnCreateDone} />
       <div className="mx-auto grid grid-cols-1 gap-y-16 gap-x-8 pt-10 lg:grid-cols-3">
         {data && data.posts && data.posts.map((post, i, posts) =>
@@ -81,6 +81,6 @@ export default function Posts() {
           >Loading...</span>
         </div>
       </div>}
-    </>
+    </div>
   );
 }
