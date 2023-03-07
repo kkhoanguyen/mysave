@@ -25,3 +25,6 @@ export default async function Home() {
     </>
   )
 }
+
+export const revalidate = 1; // revalidate this page every 60 seconds
+
