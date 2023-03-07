@@ -16,7 +16,7 @@ export default function Posts() {
     setError("");
     setLoading(true);
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${page}`);
-    if (resp.statusText === "OK") {
+    if (resp.status >= 200 && resp.status < 300) {
       const respData: ResData = await resp.json();
       console.log(respData, 'respData');
       setData((prev) => ({
@@ -56,7 +56,7 @@ export default function Posts() {
     setLoading(true);
     setPage(1);
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${1}`);
-    if (resp.statusText === "OK") {
+    if (resp.status >= 200 && resp.status < 300) {
       const respData: ResData = await resp.json();
       setData(respData);
     } else {
@@ -64,7 +64,7 @@ export default function Posts() {
     }
     setLoading(false);
   };
-  console.log(data)
+  console.log(data);
   return (
     <>
       <CreateVideo onCreateDone={handleOnCreateDone} />

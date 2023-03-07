@@ -15,7 +15,7 @@ export default function PostActions({ post }: Props) {
   const router = useRouter();
   const handleDelete = async () => {
     const resp = await fetch(`/api/posts/${post.id}`, { method: "DELETE" });
-    if (resp.statusText === "OK") {
+    if (resp.status >= 200 && resp.status < 300) {
       router.replace("/");
     }
   };
