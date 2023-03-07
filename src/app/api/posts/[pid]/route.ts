@@ -1,6 +1,18 @@
-import supabase from "@/utils/supabase";
+import { deletePost } from "@/utils/supabase";
 
-export async function GET(request: Request, res: Response) {
-  const { data, error } = await supabase.from("videos").select("*");
-  return new Response(JSON.stringify(data));
+export async function DELETE(request: Request, { params }: any) {
+  console.log(params);
+  let resOption = {};
+  const id = Number(params["pid"]);
+  if (id) {
+    const resp = await deletePost(id);
+  }
+
+  return new Response(
+    null,
+    resOption || {
+      status: 400,
+      statusText: "invalid youtube url",
+    },
+  );
 }

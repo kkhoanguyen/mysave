@@ -1,11 +1,14 @@
 import { getPosts, insertPost } from "@/utils/supabase";
 import { getVideoMeta, youtubeParser } from "@/utils/youtube";
+import { NextRequest } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest, res: Response) {
   try {
-    const posts = await getPosts();
-    console.log(posts);
-    return new Response(JSON.stringify(posts));
+    const { searchParams } = req.nextUrl;
+    const limit = Number(searchParams.get("limit")) || 10;
+    const page = Number(searchParams.get("page")) || 1;
+    const data = await getPosts(limit, page);
+    return new Response(JSON.stringify(data));
   } catch (error) {}
 }
 export async function POST(req: Request, res: Response) {

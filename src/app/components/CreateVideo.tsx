@@ -1,7 +1,14 @@
 'use client';
 import React, { useState, useCallback } from 'react';
 import CreateVideoModal from './CreateVideoModal';
-export default function CreateVideo() {
+import { Button } from 'react-daisyui';
+
+
+export interface Props {
+  onCreateDone: () => void;
+}
+export default function CreateVideo({ onCreateDone }: Props
+) {
 
   const [open, setOpen] = useState(false);
 
@@ -10,11 +17,12 @@ export default function CreateVideo() {
   };
   return (
     <div>
-      <button className="inline-flex w-full justify-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 sm:ml-3 sm:w-auto"
+      <Button
+        color="primary"
         onClick={() => setOpen(true)}>
         Create Video
-      </button>
-      <CreateVideoModal open={open} onClose={handleClose} />
+      </Button>
+      <CreateVideoModal open={open} onClose={handleClose} onCreateDone={onCreateDone} />
     </div >
   );
 }

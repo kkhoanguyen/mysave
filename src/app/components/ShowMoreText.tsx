@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import { Collapse } from 'react-daisyui';
 
 export interface Props {
   text: string,
@@ -14,9 +15,9 @@ export default function ShowMoreText({
   const [showMore, setShowMore] = useState(false);
   return (
     <>
-      <p className="mt-1 text-gray-500">{
+      <p className="mt-1 text-gray-400">{
         showMore ? text : `${text.substring(0, length)}...`
-      }</p>
-      <button onClick={() => setShowMore(!showMore)} > {showMore ? "show less" : 'show more'}</button></>
+      } <button onClick={() => setShowMore(!showMore)} > {showMore ? "show less" : 'show more'}</button></p>
+    </>
   );
 }
