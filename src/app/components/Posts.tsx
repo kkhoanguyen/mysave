@@ -3,7 +3,6 @@ import React, { useState, useEffect, useCallback, useRef, RefObject } from 'reac
 import Post from './Post';
 import { Post as PostType } from '@/types/post';
 import CreateVideo from "./CreateVideo";
-import ShareModal from './ShareModal';
 
 const LIMIT = 9;
 interface ResData { posts: PostType[], total: Number; }
