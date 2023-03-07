@@ -3,8 +3,10 @@ import { getVideoMeta, youtubeParser } from "@/utils/youtube";
 import { Post } from "@/types/post";
 
 export async function GET(request: Request, res: Response) {
-  const { data, error } = await getPosts();
-  return new Response(JSON.stringify(data));
+  let posts;
+  try {
+    return await getPosts();
+  } catch (error) {}
 }
 export async function POST(req: Request, res: Response) {
   const ytLink = await req.text();
