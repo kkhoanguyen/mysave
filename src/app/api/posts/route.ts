@@ -1,11 +1,11 @@
 import { getPosts, insertPost } from "@/utils/supabase";
 import { getVideoMeta, youtubeParser } from "@/utils/youtube";
-import { Post } from "@/types/post";
 
-export async function GET(request: Request, res: Response) {
-  let posts;
+export async function GET() {
   try {
-    return await getPosts();
+    const posts = await getPosts();
+    console.log(posts);
+    return new Response(JSON.stringify(posts));
   } catch (error) {}
 }
 export async function POST(req: Request, res: Response) {
