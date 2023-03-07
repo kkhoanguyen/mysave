@@ -66,6 +66,7 @@ export default function Posts() {
     }
     setLoading(false);
   };
+  console.log(data)
   return (
     <>
       <CreateVideo onCreateDone={handleOnCreateDone} />
