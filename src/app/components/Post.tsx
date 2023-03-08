@@ -6,8 +6,9 @@ import ShareModal from './ShareModal';
 
 export interface Props {
   post: PostTpe;
+  host: string;
 }
-export default function Post({ post }: Props) {
+export default function Post({ post, host }: Props) {
   const [isShare, setIsShare] = useState(false);
   return (
     <div className='w-full'>
@@ -25,7 +26,7 @@ export default function Post({ post }: Props) {
           </Card.Body>
         </a>
       </Card >
-      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${window.location.host}/posts/${post.id}`} />
+      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${host}/posts/${post.id}`} />
     </div>
   );
 }

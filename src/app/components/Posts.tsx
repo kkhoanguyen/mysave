@@ -5,7 +5,7 @@ import { PostResponseData } from '@/types/post';
 import CreateVideo from "./CreateVideo";
 
 const LIMIT = 9;
-export default function Posts({ initPage = 1, initData }: { initPage: number; initData: PostResponseData; }) {
+export default function Posts({ initPage = 1, initData, host }: { initPage: number; initData: PostResponseData; host: string; }) {
   const [data, setData] = useState<PostResponseData>(initData);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
@@ -68,8 +68,8 @@ export default function Posts({ initPage = 1, initData }: { initPage: number; in
       <div className="mx-auto grid grid-cols-1 gap-y-16 gap-x-8 pt-10 lg:grid-cols-3">
         {data && data.posts && data.posts.map((post, i, posts) =>
           i === posts.length - 1 && !loading
-            ? (<div ref={elementRef} key={post.id}><Post key={post.id} post={post} /></div>)
-            : (<Post key={post.id} post={post} />))}
+            ? (<div ref={elementRef} key={post.id}><Post key={post.id} post={post} host={host} /></div>)
+            : (<Post key={post.id} post={post} host={host} />))}
       </div>
       {loading && <div className="flex justify-center mt-4">
         <div
