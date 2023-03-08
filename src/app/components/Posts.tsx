@@ -1,23 +1,22 @@
 "use client";
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Post from './Post';
-import { Post as PostType } from '@/types/post';
+import { PostResponseData } from '@/types/post';
 import CreateVideo from "./CreateVideo";
 
 const LIMIT = 9;
-interface ResData { posts: PostType[], total: Number; }
-export default function Posts() {
-  const [data, setData] = useState<ResData>();
+export default function Posts({ initPage = 1, initData }: { initPage: number; initData: PostResponseData; }) {
+  const [data, setData] = useState<PostResponseData>(initData);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initPage);
   const getPosts = useCallback(async () => {
     setError("");
     setLoading(true);
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${page}`);
     if (resp.status >= 200 && resp.status < 300) {
-      const respData: ResData = await resp.json();
+      const respData: PostResponseData = await resp.json();
       setData((prev) => ({
         posts: prev && prev.posts ? prev.posts.concat(respData.posts) : respData.posts,
         total: respData.total
@@ -56,7 +55,7 @@ export default function Posts() {
     setPage(1);
     const resp = await fetch(`/api/posts?limit=${LIMIT}&page=${1}`);
     if (resp.status >= 200 && resp.status < 300) {
-      const respData: ResData = await resp.json();
+      const respData: PostResponseData = await resp.json();
       setData(respData);
     } else {
       setError("Error fetching posts");

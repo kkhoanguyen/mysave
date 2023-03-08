@@ -6,3 +6,9 @@ export interface Post {
   thumbnail: string;
   description: string;
 }
+
+
+export interface PostResponseData {
+  posts: Post[];
+  total: Number;
+}

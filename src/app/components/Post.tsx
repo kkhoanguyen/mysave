@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Image from 'next/image';
 import { Post as PostTpe } from '@/types/post';
 import { Button, Card } from 'react-daisyui';
 import { shareIcon } from '@/icons';
@@ -10,7 +9,6 @@ export interface Props {
 }
 export default function Post({ post }: Props) {
   const [isShare, setIsShare] = useState(false);
-
   return (
     <div className='w-full'>
       <Card bordered className='bg-white'>
@@ -27,7 +25,7 @@ export default function Post({ post }: Props) {
           </Card.Body>
         </a>
       </Card >
-      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${window.location.href}posts/${post.id}`} />
+      <ShareModal open={isShare} setOpen={(t: boolean) => setIsShare(t)} shareURL={`${window.location.host}/posts/${post.id}`} />
     </div>
   );
 }

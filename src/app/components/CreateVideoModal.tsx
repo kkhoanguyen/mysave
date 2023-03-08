@@ -1,5 +1,4 @@
-import { Fragment, useRef, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { Button, Input, Modal } from 'react-daisyui';
 import { youtubeParser } from '@/utils/youtube';
 
@@ -9,11 +8,14 @@ export interface Props {
   onCreateDone: () => void,
 }
 export default function CreateVideoModal({ open, onClose, onCreateDone }: Props) {
-  const router = useRouter();
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [creating, setCreating] = useState(false);
-  const cancelButtonRef = useRef(null);
+  const handleClose = () => {
+    setValue("");
+    setError(false);
+    onClose();
+  }
   const onCreateVideo = async () => {
     setCreating(true);
     try {
@@ -21,8 +23,8 @@ export default function CreateVideoModal({ open, onClose, onCreateDone }: Props)
         method: "POST",
         body: value
       });
-      onClose();
       onCreateDone()
+      handleClose()
     } catch (error) {
 
     } finally {
@@ -59,12 +61,13 @@ export default function CreateVideoModal({ open, onClose, onCreateDone }: Props)
             placeholder="https://www.youtube.com/watch?v={videoID}, https://youtu.be/{videoID}"
             onChange={(e) => setValue(e.target.value)}
             onBlur={validatedLink}
+            value={value}
           />
         </div>
       </Modal.Body>
 
       <Modal.Actions>
-        <Button onClick={onClose} color="ghost">Cancel</Button>
+        <Button onClick={handleClose} color="ghost">Cancel</Button>
         <Button onClick={handleCreate} color="primary" disabled={error}>Add</Button>
       </Modal.Actions>
       {creating &&

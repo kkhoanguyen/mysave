@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { Post } from "@/types/post";
+import { Post, PostResponseData } from "@/types/post";
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -8,7 +8,10 @@ const supabase = createClient(
 
 export default supabase;
 
-export async function getPosts(limit = 10, page = 1) {
+export async function getPosts(
+  limit = 10,
+  page = 1,
+): Promise<PostResponseData> {
   const start = limit * page - limit;
   const end = start + limit - 1;
   const {
@@ -25,8 +28,8 @@ export async function getPosts(limit = 10, page = 1) {
     throw error;
   }
   return {
-    posts: posts || [],
-    total: count,
+    posts: posts.map((p) => p as Post) || [],
+    total: count || 0,
   };
 }
 
